@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mobile Search</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: bisque;
+      color: gray;
+    }
+
+    .search-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #searchCriteria,
+    #searchValue,
+    #searchButton {
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+      background-color: aliceblue;
+    }
+
+    #resultsContainer {
+      margin-top: 20px;
+      text-align: center;
+      background-color: cornsilk;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="search-container">
+    <select id="searchCriteria">
+      <option value="brand">Brand</option>
+      <option value="model">Model</option>
+      <option value="price">Price</option>
+      <option value="camera">Camera</option>
+    </select>
+    <input type="text" id="searchValue" placeholder="Enter search value">
+    <button id="searchButton" onclick="searchMobiles()">Search</button>
+  </div>
+
+  <div id="resultsContainer"></div>
+
+  <script>
+    let mobileData = [
+    {
+        brand: "Samsung",
+        model: "SamsungA30",
+        price: "40000",
+        camera: "40px",
+        ram: "8gb",
+        rom : "128gb",
+        
+    },
+    {
+        brand: "Samsung",
+        model: "SamsungA10",
+        price: "40000",
+        camera: "40px",
+        ram: "4gb",
+        rom : "128gb",
+        
+    },
+    {
+        brand: "Samsung",
+        model: "SamsungA20",
+        price: "40000",
+        camera: "40px",
+        ram: "4gb",
+        rom : "128gb",
+        
+    },
+    {
+        brand: "Motorola",
+        model: "Motorola123",
+        price: "5000",
+        camera: "2px",
+        ram: "2gb",
+        rom : "32gb",
+        
+    },
+    {
+        brand: "Vivo",
+        model: "VivoY20",
+        price: "20000",
+        camera: "40px",
+        ram: "2gb",
+        rom : "32gb",
+        
+    },
+    {
+        brand: "Vivo",
+        model: "VivoY11",
+        price: "20000",
+        camera: "40px",
+        ram: "3gb",
+        rom : "32gb",
+        
+    },
+    {
+        brand: "Vivo",
+        model: "VivoY15",
+        price: "30000",
+        camera: "40px",
+        ram: "4gb",
+        rom : "64gb",
+        
+    },
+    
+    {
+        brand: "Iphone",
+        model: "Iphone12",
+        price: "300000",
+        camera: "40px",
+        ram: "8gb",
+        rom : "128gb",
+        
+    },
+    {
+        brand: "Iphone",
+        model: "Iphone13",
+        price: "300000",
+        camera: "40px",
+        ram: "8gb",
+        rom : "128gb",
+        
+    },
+    {
+        brand: "Iphone",
+        model: "IphoneX",
+        price: "300000",
+        camera: "40px",
+        ram: "8gb",
+        rom : "128gb",
+        
+    },
+    ];
+
+    function searchMobiles() {
+      const criteria = document.getElementById('searchCriteria').value;
+      const value = document.getElementById('searchValue').value.toLowerCase();
+
+      const filteredMobiles = mobileData.filter(mobile => {
+        const mobileValue = mobile[criteria].toLowerCase();
+        return mobileValue.includes(value);
+      });
+
+      displayResults(filteredMobiles);
+    }
+
+    function displayResults(results) {
+      const resultsContainer = document.getElementById('resultsContainer');
+      resultsContainer.innerHTML = '';
+
+      if (results.length === 0) {
+        resultsContainer.innerHTML = '<p>No mobile phones found.</p>';
+        return;
+      }
+
+      const resultList = document.createElement('ul');
+      results.map(mobile => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${mobile.brand} - ${mobile.model}`;
+        resultList.appendChild(listItem);
+      });
+
+      resultsContainer.appendChild(resultList);
+    }
+  </script>
+</body>
+
+</html>
